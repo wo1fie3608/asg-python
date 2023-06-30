@@ -32,7 +32,6 @@ class Data(BaseModel):
 
 @app.post("/getCurrentWeather")
 def get_current_weather(data : Data):
-    print(data)
     headers = {
         "X-RapidAPI-Key": API_KEY,
         "Content-Type": "application/json",
@@ -47,7 +46,6 @@ def get_current_weather(data : Data):
         response = requests.get(WEATHER_API_URL, headers=headers, params=params)
         response.raise_for_status()
         weather_data = response.json()
-        print(response.json())
         weather = WeatherResponse(
             Weather=str(weather_data["current"]["temp_c"]) + " C",
             Latitude=weather_data["location"]["lat"],
